@@ -20,22 +20,32 @@ const corsOptions = {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
 
-    const allowedOrigins =
-      process.env.NODE_ENV === "production"
-        ? [
-            "https://yourdomain.com",
-            "https://your-frontend-app.vercel.app",
-            "https://your-frontend-app.netlify.app",
-            /\.railway\.app$/, // Allow any Railway subdomain
-            /\.up\.railway\.app$/, // Railway's new domain format
-          ]
-        : [
-            "http://localhost:3000",
-            "http://localhost:3001",
-            "http://localhost:5173", // Vite default
-            "http://127.0.0.1:3000",
-            "http://127.0.0.1:5173",
-          ];
+    // Define allowed origins - include localhost for development from any environment
+    const allowedOrigins = [
+      // Production domains
+      'https://yourdomain.com',
+      'https://your-frontend-app.vercel.app',
+      'https://your-frontend-app.netlify.app',
+      /\.railway\.app$/, // Allow any Railway subdomain
+      /\.up\.railway\.app$/, // Railway's new domain format
+      
+      // Development/Local domains (always allowed for testing)
+      'http://localhost:3000',
+      'http://localhost:3001',
+      'http://localhost:5173', // Vite default
+      'http://localhost:5174', // Alternative Vite port
+      'http://localhost:4173', // Vite preview
+      'http://localhost:8080', // Alternative dev server
+      'http://127.0.0.1:3000',
+      'http://127.0.0.1:3001',
+      'http://127.0.0.1:5173',
+      'http://127.0.0.1:5174',
+      'http://127.0.0.1:8080',
+      
+      // Add any other localhost ports you might use
+      /^http:\/\/localhost:\d+$/,
+      /^http:\/\/127\.0\.0\.1:\d+$/,
+    ];
 
     // Check if origin is allowed
     const isAllowed = allowedOrigins.some((allowedOrigin) => {
@@ -48,10 +58,16 @@ const corsOptions = {
       return false;
     });
 
+    // Debug logging for CORS (only in development or when CORS_DEBUG is enabled)
+    if (process.env.NODE_ENV === 'development' || process.env.CORS_DEBUG === 'true') {
+      console.log(`CORS Request - Origin: ${origin}, Allowed: ${isAllowed}`);
+    }
+
     if (isAllowed) {
       callback(null, true);
     } else {
-      callback(new Error("Not allowed by CORS"));
+      console.error(`CORS Error - Origin not allowed: ${origin}`);
+      callback(new Error(`Not allowed by CORS. Origin: ${origin}`));
     }
   },
   credentials: true,
