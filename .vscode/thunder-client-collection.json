@@ -1,0 +1,214 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "Xpense Backend API",
+  "dateExported": "2024-01-15T10:00:00.000Z",
+  "version": "1.1",
+  "folders": [
+    {
+      "_id": "auth-folder",
+      "name": "Authentication",
+      "containerId": "",
+      "created": "2024-01-15T10:00:00.000Z",
+      "sortNum": 10000
+    },
+    {
+      "_id": "categories-folder",
+      "name": "Categories",
+      "containerId": "",
+      "created": "2024-01-15T10:00:00.000Z",
+      "sortNum": 20000
+    },
+    {
+      "_id": "transactions-folder",
+      "name": "Transactions",
+      "containerId": "",
+      "created": "2024-01-15T10:00:00.000Z",
+      "sortNum": 30000
+    },
+    {
+      "_id": "stats-folder",
+      "name": "Statistics",
+      "containerId": "",
+      "created": "2024-01-15T10:00:00.000Z",
+      "sortNum": 40000
+    }
+  ],
+  "requests": [
+    {
+      "_id": "health-check",
+      "colId": "xpense-api",
+      "containerId": "auth-folder",
+      "name": "Health Check",
+      "url": "{{baseUrl}}/api/health",
+      "method": "GET",
+      "sortNum": 10000,
+      "created": "2024-01-15T10:00:00.000Z",
+      "modified": "2024-01-15T10:00:00.000Z",
+      "headers": []
+    },
+    {
+      "_id": "register-user",
+      "colId": "xpense-api",
+      "containerId": "auth-folder",
+      "name": "Register User",
+      "url": "{{baseUrl}}/api/auth/register",
+      "method": "POST",
+      "sortNum": 10001,
+      "created": "2024-01-15T10:00:00.000Z",
+      "modified": "2024-01-15T10:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"securepassword123\",\n  \"fullName\": \"Test User\"\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "login-user",
+      "colId": "xpense-api",
+      "containerId": "auth-folder",
+      "name": "Login User",
+      "url": "{{baseUrl}}/api/auth/login",
+      "method": "POST",
+      "sortNum": 10002,
+      "created": "2024-01-15T10:00:00.000Z",
+      "modified": "2024-01-15T10:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"securepassword123\"\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "get-profile",
+      "colId": "xpense-api",
+      "containerId": "auth-folder",
+      "name": "Get Profile",
+      "url": "{{baseUrl}}/api/protected/profile",
+      "method": "GET",
+      "sortNum": 10003,
+      "created": "2024-01-15T10:00:00.000Z",
+      "modified": "2024-01-15T10:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{accessToken}}"
+        }
+      ]
+    },
+    {
+      "_id": "get-categories",
+      "colId": "xpense-api",
+      "containerId": "categories-folder",
+      "name": "Get All Categories",
+      "url": "{{baseUrl}}/api/categories",
+      "method": "GET",
+      "sortNum": 20000,
+      "created": "2024-01-15T10:00:00.000Z",
+      "modified": "2024-01-15T10:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{accessToken}}"
+        }
+      ]
+    },
+    {
+      "_id": "create-custom-category",
+      "colId": "xpense-api",
+      "containerId": "categories-folder",
+      "name": "Create Custom Category",
+      "url": "{{baseUrl}}/api/categories/custom",
+      "method": "POST",
+      "sortNum": 20001,
+      "created": "2024-01-15T10:00:00.000Z",
+      "modified": "2024-01-15T10:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{accessToken}}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"name\": \"My Custom Category\",\n  \"icon\": \"🎯\",\n  \"color\": \"#FF5733\"\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "create-transaction",
+      "colId": "xpense-api",
+      "containerId": "transactions-folder",
+      "name": "Create Transaction",
+      "url": "{{baseUrl}}/api/transactions",
+      "method": "POST",
+      "sortNum": 30000,
+      "created": "2024-01-15T10:00:00.000Z",
+      "modified": "2024-01-15T10:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{accessToken}}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"title\": \"Lunch at restaurant\",\n  \"description\": \"Business lunch meeting\",\n  \"amount\": 25.50,\n  \"category\": \"Food & Dining\",\n  \"transaction_type\": \"expense\",\n  \"date\": \"2024-01-15\"\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "get-transactions",
+      "colId": "xpense-api",
+      "containerId": "transactions-folder",
+      "name": "Get All Transactions",
+      "url": "{{baseUrl}}/api/transactions",
+      "method": "GET",
+      "sortNum": 30001,
+      "created": "2024-01-15T10:00:00.000Z",
+      "modified": "2024-01-15T10:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{accessToken}}"
+        }
+      ]
+    },
+    {
+      "_id": "get-transaction-stats",
+      "colId": "xpense-api",
+      "containerId": "stats-folder",
+      "name": "Get Transaction Summary",
+      "url": "{{baseUrl}}/api/transactions/stats/summary",
+      "method": "GET",
+      "sortNum": 40000,
+      "created": "2024-01-15T10:00:00.000Z",
+      "modified": "2024-01-15T10:00:00.000Z",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{accessToken}}"
+        }
+      ]
+    }
+  ]
+}

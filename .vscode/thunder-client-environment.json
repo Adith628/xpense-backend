@@ -1,0 +1,14 @@
+[
+  {
+    "name": "baseUrl",
+    "value": "http://localhost:3000"
+  },
+  {
+    "name": "accessToken",
+    "value": ""
+  },
+  {
+    "name": "refreshToken",
+    "value": ""
+  }
+]
