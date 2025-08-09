@@ -45,15 +45,6 @@ In your Railway project dashboard:
 2. **Go to the "Variables" tab**
 3. **Add the following environment variables**:
 
-```env
-SUPABASE_URL=https://detefrgkmbfnmjcrfmfz.supabase.co
-SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRldGVmcmdrbWJmbm1qY3JmbWZ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ3MzM2MDYsImV4cCI6MjA3MDMwOTYwNn0.S_mWOBnXfuUD9LJHeiFvDpKt2L0zbc43C0gdefGLWMI
-SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRldGVmcmdrbWJmbm1qY3JmbWZ6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NDczMzYwNiwiZXhwIjoyMDcwMzA5NjA2fQ._E8mLOFnVCg-dQiOVtV3UwaCB3OXIpWFomRytXx8PY0
-JWT_SECRET=your_strong_jwt_secret_here_replace_this
-NODE_ENV=production
-PORT=3000
-```
-
 ⚠️ **Important**: Change `JWT_SECRET` to a strong, unique secret key!
 
 ### Step 4: Update CORS Configuration
