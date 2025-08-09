@@ -13,15 +13,53 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(helmet());
-app.use(
-  cors({
-    origin:
+
+// CORS Configuration
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+
+    const allowedOrigins =
       process.env.NODE_ENV === "production"
-        ? ["https://yourdomain.com"]
-        : ["http://localhost:3000", "http://localhost:3001"],
-    credentials: true,
-  })
-);
+        ? [
+            "https://yourdomain.com",
+            "https://your-frontend-app.vercel.app",
+            "https://your-frontend-app.netlify.app",
+            /\.railway\.app$/, // Allow any Railway subdomain
+            /\.up\.railway\.app$/, // Railway's new domain format
+          ]
+        : [
+            "http://localhost:3000",
+            "http://localhost:3001",
+            "http://localhost:5173", // Vite default
+            "http://127.0.0.1:3000",
+            "http://127.0.0.1:5173",
+          ];
+
+    // Check if origin is allowed
+    const isAllowed = allowedOrigins.some((allowedOrigin) => {
+      if (typeof allowedOrigin === "string") {
+        return allowedOrigin === origin;
+      }
+      if (allowedOrigin instanceof RegExp) {
+        return allowedOrigin.test(origin);
+      }
+      return false;
+    });
+
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

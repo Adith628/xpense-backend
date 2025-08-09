@@ -39,6 +39,12 @@ The application uses the following main tables:
 
 Each authenticated user has isolated access to their own transactions and categories through Supabase RLS policies.
 
+## 🚀 Quick Deploy to Railway
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template)
+
+For detailed deployment instructions, see [RAILWAY_DEPLOYMENT.md](./RAILWAY_DEPLOYMENT.md)
+
 ## Getting Started
 
 ### Prerequisites
